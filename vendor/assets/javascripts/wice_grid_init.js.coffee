@@ -1,5 +1,6 @@
-jQuery ->
-  initWiceGrid()
+ready ->
+  jQuery ->
+    initWiceGrid()
 
 initWiceGrid = ->
 
@@ -287,5 +288,5 @@ setupExternalSubmitReset =  ->
 
 window['getGridProcessorForElement'] = getGridProcessorForElement
 
-$(document).ready(initWiceGrid())
-$(document).on('page:load', initWiceGrid())
+$(document).ready(ready)
+$(document).on('page:load', ready)
