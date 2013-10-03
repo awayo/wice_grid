@@ -1,4 +1,4 @@
-ready ->
+ready =->
   jQuery ->
     initWiceGrid()
 
