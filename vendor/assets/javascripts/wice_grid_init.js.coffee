@@ -286,3 +286,6 @@ setupExternalSubmitReset =  ->
           false
 
 window['getGridProcessorForElement'] = getGridProcessorForElement
+
+$(document).ready(initWiceGrid())
+$(document).on('page:load', initWiceGrid())
