@@ -2,7 +2,7 @@ ready ->
   jQuery ->
     initWiceGrid()
 
-  initWiceGrid = ->
+initWiceGrid = ->
 
     $(".wice-grid-container").each (index, wiceGridContainer) ->
 
@@ -48,7 +48,7 @@ ready ->
 
 
 
-  moveDateBoundIfInvalidPeriod = (dataFieldNameWithTheOtherDatepicker, datepickerHiddenField, selectedDate, dateFormat, predicate) ->
+moveDateBoundIfInvalidPeriod = (dataFieldNameWithTheOtherDatepicker, datepickerHiddenField, selectedDate, dateFormat, predicate) ->
     if (datepickerId = datepickerHiddenField.data(dataFieldNameWithTheOtherDatepicker)) &&
       (theOtherDatepicker = $(_datepickerId = "#" + datepickerId)) &&
       (theOtherDate = theOtherDatepicker.datepicker('getDate')) &&
@@ -59,8 +59,9 @@ ready ->
 
 
 
-  # datepicker logic
-  setupDatepicker = ->
+
+# datepicker logic
+setupDatepicker = ->
     # check if datepicker is loaded
     if $('.wice-grid-container input.check-for-datepicker[type=hidden], .wg-detached-filter input.check-for-datepicker[type=hidden]').length != 0
       unless $.datepicker
@@ -126,13 +127,13 @@ ready ->
           )
  
           $(that).html(dateText)
-           if eventToTriggerOnChange
-           datepickerHiddenField.trigger(eventToTriggerOnChange)
+          if eventToTriggerOnChange
+             datepickerHiddenField.trigger(eventToTriggerOnChange)
 
 
 
-  # hiding and showing the row with filters
-  setupHidingShowingOfFilterRow = (wiceGridContainer) ->
+# hiding and showing the row with filters
+setupHidingShowingOfFilterRow = (wiceGridContainer) ->
     hideFilter = '.wg-hide-filter'
     showFilter = '.wg-show-filter'
     filterRow = '.wg-filter-row'
@@ -148,13 +149,13 @@ ready ->
       $(filterRow, wiceGridContainer).show()
 
 
-  setupCsvExport = (wiceGridContainer, gridProcessor) ->
+setupCsvExport = (wiceGridContainer, gridProcessor) ->
     $('.export-to-csv-button', wiceGridContainer).click ->
       gridProcessor.exportToCsv()
 
 
-  # trigger submit/reset from within the grid
-  setupSubmitReset = (wiceGridContainer, gridProcessor) ->
+# trigger submit/reset from within the grid
+setupSubmitReset = (wiceGridContainer, gridProcessor) ->
     $('.submit', wiceGridContainer).click ->
       gridProcessor.process()
 
@@ -167,15 +168,15 @@ ready ->
         gridProcessor.process()
 
 
-  focusElementIfNeeded = (focusId) ->
+focusElementIfNeeded = (focusId) ->
     elements = $('#' + focusId)
     if elToFocus = elements[0]
       elToFocus.value = elToFocus.value
       elToFocus.focus()
 
 
-  # autoreload for internal filters
-  setupAutoreloadsForInternalFilters = (wiceGridContainer, gridProcessor) ->
+# autoreload for internal filters
+setupAutoreloadsForInternalFilters = (wiceGridContainer, gridProcessor) ->
     $('select.auto-reload', wiceGridContainer).change ->
       gridProcessor.process()
 
@@ -188,8 +189,8 @@ ready ->
     $(document).bind 'wg:calendarChanged_' + gridProcessor.name, ->
       gridProcessor.process()
 
-  # autoreload for internal filters
-  setupAutoreloadsForExternalFilters =  ->
+# autoreload for internal filters
+setupAutoreloadsForExternalFilters =  ->
 
     $('.wg-detached-filter').each (index, detachedFilterContainer) ->
       gridProcessor = getGridProcessorForElement(detachedFilterContainer)
@@ -204,8 +205,8 @@ ready ->
           gridProcessor.process()
 
 
-  # trigger the all records mode
-  setupShowingAllRecords = (wiceGridContainer, gridProcessor) ->
+# trigger the all records mode
+setupShowingAllRecords = (wiceGridContainer, gridProcessor) ->
     $('.wg-show-all-link, .wg-back-to-pagination-link', wiceGridContainer).click (event) ->
       event.preventDefault()
       gridState = $(this).data("grid-state")
@@ -218,8 +219,8 @@ ready ->
       else
         reloadGrid()
 
-  # dropdown filter multiselect
-  setupMultiSelectToggle = (wiceGridContainer)->
+# dropdown filter multiselect
+setupMultiSelectToggle = (wiceGridContainer)->
     $('.expand-multi-select-icon', wiceGridContainer).click ->
       $(this).prev().each (index, select) ->
         select.multiple = true
@@ -233,7 +234,7 @@ ready ->
       $(this).hide()
 
 
-  setupBulkToggleForActionColumn = (wiceGridContainer) ->
+setupBulkToggleForActionColumn = (wiceGridContainer) ->
     $('.select-all', wiceGridContainer).click ->
       $('.sel input', wiceGridContainer).prop('checked', true)
 
@@ -241,7 +242,7 @@ ready ->
       $('.sel input', wiceGridContainer).prop('checked', false)
 
 
-  getGridProcessorForElement = (element) ->
+getGridProcessorForElement = (element) ->
     gridName = $(element).data('grid-name')
     if gridName
       window[gridName]
@@ -249,7 +250,7 @@ ready ->
       null
 
 
-  setupExternalCsvExport =  ->
+setupExternalCsvExport =  ->
 
     $(".wg-external-csv-export-button").each (index, externalCsvExportButton) ->
       gridProcessor = getGridProcessorForElement(externalCsvExportButton)
@@ -258,7 +259,7 @@ ready ->
           gridProcessor.exportToCsv()
 
 
-  setupExternalSubmitReset =  ->
+setupExternalSubmitReset =  ->
 
     $(".wg-external-submit-button").each (index, externalSubmitButton) ->
       gridProcessor = getGridProcessorForElement(externalSubmitButton)
