@@ -131,7 +131,7 @@ module Wice
 
         sheet1.row(0).default_format = header_format
 
-        FasterCSV.open(filename, 'r') do |csv|
+        CSV.open(filename, 'r') do |csv|
           csv.each_with_index do |row, i|
             sheet1.row(i).replace(row)
           end
