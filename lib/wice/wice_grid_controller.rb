@@ -120,7 +120,7 @@ module Wice
         grid.csv_tempfile.close
 
         book = ::Spreadsheet::Workbook.new
-        sheet1 = book.create_worksheet
+        sheet1 = book.create_worksheet :name => grid.csv_file_name
 
         header_format = ::Spreadsheet::Format.new(
             :weight => :bold,
