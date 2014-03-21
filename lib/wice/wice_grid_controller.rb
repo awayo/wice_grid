@@ -139,7 +139,7 @@ module Wice
 
         book.write(temp_filename)
 
-        send_file_rails2 temp_filename, :filename => filename, :type => 'text/csv'
+        send_file_rails2 temp_filename, :filename => filename.sub('.csv', '.xls'), :type => 'application/excel'
         grid.csv_tempfile = nil
         true
       else
