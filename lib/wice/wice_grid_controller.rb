@@ -137,7 +137,7 @@ module Wice
           end
         end
 
-        autofit book
+        autofit sheet1
 
         book.write(temp_filename)
 
