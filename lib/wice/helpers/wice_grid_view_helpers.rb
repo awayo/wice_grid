@@ -573,6 +573,33 @@ module Wice
       grid.csv_tempfile = spreadsheet.tempfile
     end
 
+    def grid_xls(grid, rendering) #:nodoc:
+
+      spreadsheet = ::Wice::Spreadsheet.new(grid.name, grid.csv_field_separator)
+
+      # columns
+      spreadsheet << rendering.column_labels(:in_csv)
+
+      # rendering  rows
+      grid.each do |ar| # rows
+        row = []
+
+        rendering.each_column(:in_csv) do |column|
+          cell_block = column.cell_rendering_block
+
+          column_block_output = call_block(cell_block, ar)
+
+          if column_block_output.kind_of?(Array)
+            column_block_output, additional_opts = column_block_output
+          end
+
+          row << column_block_output
+        end
+        spreadsheet << row
+      end
+      grid.csv_tempfile = spreadsheet.tempfile
+    end
+
     def pagination_panel_content(grid, extra_request_parameters, allow_showing_all_records) #:nodoc:
       extra_request_parameters = extra_request_parameters.clone
       if grid.saved_query

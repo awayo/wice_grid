@@ -1,4 +1,6 @@
 # encoding: UTF-8
+require 'fastercsv'
+require 'spreadsheet'
 module Wice
   module Controller
 
@@ -116,6 +118,27 @@ module Wice
         temp_filename = temp_filename.strip
         filename = (grid.csv_file_name || grid.name ) + '.csv'
         grid.csv_tempfile.close
+
+        book = Spreadsheet::Workbook.new
+        sheet1 = book.create_worksheet
+
+        header_format = Spreadsheet::Format.new(
+            :weight => :bold,
+            :horizontal_align => :center,
+            :bottom => true,
+            :locked => true
+        )
+
+        sheet1.row(0).default_format = header_format
+
+        FasterCSV.open(filename, 'r') do |csv|
+          csv.each_with_index do |row, i|
+            sheet1.row(i).replace(row)
+          end
+        end
+
+        book.write(temp_filename)
+
         send_file_rails2 temp_filename, :filename => filename, :type => 'text/csv'
         grid.csv_tempfile = nil
         true
