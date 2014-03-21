@@ -125,7 +125,7 @@ module Wice
         header_format = ::Spreadsheet::Format.new(
             :weight => :bold,
             :horizontal_align => :center,
-            :bottom => true,
+            :bottom => :none,
             :locked => true
         )
 
