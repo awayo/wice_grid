@@ -119,10 +119,10 @@ module Wice
         filename = (grid.csv_file_name || grid.name ) + '.csv'
         grid.csv_tempfile.close
 
-        book = Spreadsheet::Workbook.new
+        book = ::Spreadsheet::Workbook.new
         sheet1 = book.create_worksheet
 
-        header_format = Spreadsheet::Format.new(
+        header_format = ::Spreadsheet::Format.new(
             :weight => :bold,
             :horizontal_align => :center,
             :bottom => true,
